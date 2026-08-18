@@ -1,25 +1,27 @@
-/* ==========================================================================
-   Design System & Variáveis
-   ========================================================================== */
+/* =========================================
+   VARIÁVEIS GERAIS (DESIGN SYSTEM)
+   Comentado para fácil alteração de cores
+   ========================================= */
 :root {
-    --primary: #0047AB;
-    --primary-dark: #003380;
-    --accent: #FFB300;
-    --bg-main: #FFFFFF;
-    --bg-light: #F4F7FB;
-    --text-dark: #1A1A1A;
-    --text-muted: #4A4A4A;
+    /* Cores Primárias e Secundárias */
+    --color-primary: #2563EB; /* Azul vibrante (Confiança) */
+    --color-primary-hover: #1D4ED8;
+    --color-bg: #FFFFFF;
+    --color-bg-light: #F8FAFC;
+    --color-bg-dark: #0F172A;
+    --color-text-main: #1E293B;
+    --color-text-muted: #64748B;
     
-    --radius: 16px;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --gap: clamp(1.5rem, 3vw, 3rem);
-    --font-base: 16px;
-    --font-family: 'Montserrat', sans-serif;
+    /* Utilitários Visuais */
+    --radius: 16px; /* Design Clean & Bold */
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Responsividade Dinâmica (Gaps) */
+    --gap-fluid: clamp(1rem, 2vw + 1rem, 3rem);
 }
 
-/* ==========================================================================
-   Reset e Base
-   ========================================================================== */
+/* Reset Base */
 * {
     margin: 0;
     padding: 0;
@@ -27,29 +29,65 @@
 }
 
 html {
-    font-size: var(--font-base);
     scroll-behavior: smooth;
+    font-size: 16px; /* Base para o controle de JS */
 }
 
 body {
-    font-family: var(--font-family);
-    color: var(--text-dark);
-    background-color: var(--bg-main);
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-main);
+    background-color: var(--color-bg);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
+/* =========================================
+   SISTEMA DE GRID E CONTAINERS
+   ========================================= */
 .container {
-    width: min(100% - 2rem, 1200px);
-    margin-inline: auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
-.bg-light {
-    background-color: var(--bg-light);
+.section-padding {
+    padding: clamp(3rem, 5vw + 2rem, 6rem) 0;
 }
 
-/* ==========================================================================
-   Camada de Acessibilidade: Alto Contraste (Blindagem)
-   ========================================================================== */
+/* =========================================
+   ACESSIBILIDADE E ALTO CONTRASTE (BLINDAGEM)
+   ========================================= */
+.accessibility-bar {
+    background-color: #f1f5f9;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.a11y-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+}
+
+.a11y-controls button {
+    background: none;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-text-main);
+    transition: var(--transition);
+}
+
+.a11y-controls button:hover {
+    background: #e2e8f0;
+}
+
+/* Regra Exata Obrigatória de Contraste */
 body.high-contrast, body.high-contrast *:not(i):not(.icon) {
     background-color: #000 !important;
     color: #fff !important;
@@ -64,247 +102,298 @@ body.high-contrast a, body.high-contrast button {
     font-weight: bold !important;
 }
 
-/* ==========================================================================
-   Cabeçalho
-   ========================================================================== */
-.site-header {
-    background: var(--bg-main);
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 1rem 0;
+/* =========================================
+   COMPONENTES E TIPOGRAFIA
+   ========================================= */
+.section-title {
+    font-size: clamp(2rem, 3vw + 1rem, 2.5rem);
+    text-align: center;
+    margin-bottom: var(--gap-fluid);
+    font-weight: 800;
+    color: var(--color-text-main);
 }
 
-.header-inner {
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #FFF;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+.header {
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
 }
 
-.brand {
+.logo {
     font-size: 1.5rem;
-    color: var(--primary);
+    font-weight: 400;
+    color: var(--color-text-main);
 }
 
-.a11y-toolbar button {
-    background: var(--bg-light);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+.logo strong {
+    color: var(--color-primary);
+    font-weight: 800;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--color-text-main);
     font-weight: 600;
-    cursor: pointer;
-    margin-left: 0.5rem;
-    transition: background 0.3s;
+    transition: var(--transition);
 }
 
-.a11y-toolbar button:hover {
-    background: #E2E8F0;
+.nav-link:hover {
+    color: var(--color-primary);
 }
 
-/* ==========================================================================
-   Hero Section
-   ========================================================================== */
+/* =========================================
+   HERO SECTION
+   ========================================= */
 .hero {
-    padding: clamp(4rem, 8vw, 8rem) 0;
+    padding: clamp(4rem, 8vw + 2rem, 8rem) 0;
+    background-color: var(--color-bg-light);
     text-align: center;
 }
 
-.hero-content {
+.hero-text {
     max-width: 800px;
     margin: 0 auto;
-}
-
-.badge {
-    display: inline-block;
-    background: rgba(0, 71, 171, 0.1);
-    color: var(--primary);
-    padding: 0.5rem 1.2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.875rem;
-    margin-bottom: 1.5rem;
 }
 
 .hero h1 {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.5rem, 4vw + 1rem, 4rem);
     line-height: 1.1;
     margin-bottom: 1.5rem;
     font-weight: 800;
-}
-
-.text-highlight {
-    color: var(--primary);
+    letter-spacing: -0.02em;
 }
 
 .hero p {
-    font-size: clamp(1.1rem, 2vw, 1.25rem);
-    color: var(--text-muted);
-    margin-bottom: 2.5rem;
+    font-size: clamp(1.125rem, 1.5vw + 1rem, 1.25rem);
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
 }
 
-.cta-button {
-    display: inline-block;
-    background: var(--accent);
-    color: #000;
-    text-decoration: none;
-    padding: 1rem 2.5rem;
-    border-radius: var(--radius);
-    font-weight: 800;
-    font-size: 1.125rem;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(255, 179, 0, 0.4);
+.scarcity-text {
+    font-size: 0.875rem;
+    color: #dc2626;
+    font-weight: 600;
 }
 
-/* ==========================================================================
-   Seções Gerais e Acordeão
-   ========================================================================== */
-.pillars, .social-proof {
-    padding: clamp(4rem, 6vw, 6rem) 0;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: clamp(2rem, 4vw, 4rem);
-}
-
-.section-title h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-}
-
-.accordion-wrapper {
+/* =========================================
+   BENEFITS (GRID)
+   ========================================= */
+.benefits-grid {
     display: grid;
-    gap: 1.5rem;
-    max-width: 800px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--gap-fluid);
 }
 
-.acc-item {
-    background: var(--bg-main);
+.benefit-card {
+    background: var(--color-bg);
+    padding: 2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid #e2e8f0;
 }
 
-.acc-header {
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+/* =========================================
+   CAROUSEL
+   ========================================= */
+.bg-light {
+    background-color: var(--color-bg-light);
+}
+
+.carousel-wrapper {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel {
+    display: flex;
+    gap: var(--gap-fluid);
+    width: max-content;
+}
+
+.carousel-item {
+    scroll-snap-align: center;
+    width: clamp(300px, 40vw, 500px);
+    background: var(--color-bg);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    white-space: normal;
+}
+
+.carousel-item blockquote {
+    font-size: 1.125rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-main);
+}
+
+.carousel-author {
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+/* =========================================
+   ACCORDION (FAQ)
+   ========================================= */
+.faq-container {
+    max-width: 800px;
+}
+
+.accordion-item {
+    background: var(--color-bg);
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.accordion-header {
     width: 100%;
     text-align: left;
+    padding: 1.5rem;
     background: none;
     border: none;
-    padding: 1.5rem 2rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-family: inherit;
-    color: var(--text-dark);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-main);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.acc-content {
-    padding: 0 2rem;
+.accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-    color: var(--text-muted);
+    transition: max-height 0.4s ease-out;
+    padding: 0 1.5rem;
 }
 
-.acc-item.active .acc-content {
-    max-height: 300px;
-    padding: 0 2rem 1.5rem 2rem;
+.accordion-content p {
+    padding-bottom: 1.5rem;
+    color: var(--color-text-muted);
 }
 
-/* ==========================================================================
-   Carrossel de Depoimentos
-   ========================================================================== */
-.carousel-module {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.carousel-track-container {
-    overflow: hidden;
-    width: 100%;
-    border-radius: var(--radius);
-    display: flex;
-}
-
-.carousel-slide {
-    min-width: 100%;
-    background: var(--bg-light);
-    padding: clamp(2rem, 5vw, 4rem);
-    border-radius: var(--radius);
+/* =========================================
+   CTA & FOOTER
+   ========================================= */
+.bg-dark {
+    background-color: var(--color-bg-dark);
+    color: #FFF;
     text-align: center;
-    transition: transform 0.5s ease;
 }
 
-.carousel-slide blockquote {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: var(--primary-dark);
+.bg-dark h2, .bg-dark p {
+    color: #FFF;
 }
 
-.carousel-nav {
-    background: var(--primary);
-    color: #fff;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    flex-shrink: 0;
-    transition: transform 0.2s;
-}
-
-.carousel-nav:hover {
-    transform: scale(1.1);
-}
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-.site-footer {
-    background: var(--primary-dark);
-    color: #fff;
-    text-align: center;
-    padding: 4rem 0 2rem;
-}
-
-.site-footer h2 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
+.cta-content p {
+    font-size: 1.25rem;
     margin-bottom: 2rem;
+    opacity: 0.9;
 }
 
-.cta-button.outline {
-    background: transparent;
-    color: var(--accent);
-    border: 2px solid var(--accent);
-}
-
-.cta-button.outline:hover {
-    background: var(--accent);
-    color: #000;
-}
-
-.copyright {
-    margin-top: 4rem;
+.footer {
+    background-color: #020617;
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem 0;
     font-size: 0.875rem;
-    opacity: 0.7;
+}
+
+/* =========================================
+   ANIMAÇÕES (SCROLL REVEAL)
+   ========================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   MEDIA QUERIES (Responsividade)
+   ========================================= */
+@media (max-width: 768px) {
+    nav {
+        display: none; /* Em um projeto real, aqui entra o menu hamburger */
+    }
 }

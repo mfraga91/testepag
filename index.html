@@ -3,76 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InclusãoEdu | Acessibilidade na Escola</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Educação Inclusiva | Acessibilidade na Escola</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Cabeçalho e Ferramentas de Acessibilidade -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <div class="brand">
-                <strong>Inclusão</strong>Edu
-            </div>
-            <nav aria-label="Ferramentas de acessibilidade" class="a11y-toolbar">
-                <button id="btn-decrease" aria-label="Diminuir texto" title="Diminuir texto">A-</button>
-                <button id="btn-increase" aria-label="Aumentar texto" title="Aumentar texto">A+</button>
-                <button id="btn-contrast" aria-label="Alternar alto contraste" title="Alto contraste">Contraste</button>
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-bar" role="toolbar" aria-label="Ferramentas de acessibilidade">
+        <div class="container a11y-controls">
+            <span class="a11y-label">Acessibilidade:</span>
+            <button id="btn-contrast" aria-label="Alternar modo de alto contraste">Alto Contraste</button>
+            <button id="btn-decrease-font" aria-label="Diminuir tamanho da fonte">A-</button>
+            <button id="btn-increase-font" aria-label="Aumentar tamanho da fonte">A+</button>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo" aria-label="Logotipo Escola Acessível">Escola<strong>Acessível</strong></div>
+            <nav aria-label="Navegação principal">
+                <a href="#solucoes" class="nav-link">Nossas Soluções</a>
+                <a href="#depoimentos" class="nav-link">Impacto</a>
+                <a href="#faq" class="nav-link">Dúvidas</a>
+                <a href="#contato" class="btn btn-primary">Falar com Especialista</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <!-- Seção Hero -->
-        <section class="hero">
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <span class="badge">Educação para Todos</span>
-                    <h1>A Revolução da <br><span class="text-highlight">Acessibilidade Escolar</span></h1>
-                    <p>Transforme sua instituição de ensino em um ambiente 100% inclusivo. Metodologia comprovada por mais de 300 escolas para adequação física, tecnológica e pedagógica.</p>
-                    <a href="#contato" class="cta-button">Agendar Diagnóstico Gratuito</a>
+        <!-- Hero Section -->
+        <section class="hero reveal" aria-labelledby="hero-title">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <h1 id="hero-title">A Educação Inclusiva Começa Aqui: Transforme Sua Escola</h1>
+                    <p>Capacite educadores, adapte ambientes e garanta o aprendizado pleno para todos os alunos com nosso programa completo de acessibilidade escolar. Adeque-se à legislação e crie um ambiente de empatia.</p>
+                    <div class="hero-actions">
+                        <a href="#contato" class="btn btn-primary btn-large">Agendar Diagnóstico Gratuito</a>
+                        <span class="scarcity-text">Apenas 5 vagas para consultoria neste mês.</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção de Pilares (Acordeão) -->
-        <section class="pillars bg-light">
+        <!-- Benefícios Dinâmicos -->
+        <section id="solucoes" class="benefits section-padding reveal" aria-labelledby="benefits-title">
             <div class="container">
-                <div class="section-title">
-                    <h2>Nossos Pilares de Inclusão</h2>
-                    <p>Uma abordagem completa para eliminar barreiras no ambiente escolar.</p>
-                </div>
-                <div id="accordion-root" class="accordion-wrapper" role="tablist">
+                <h2 id="benefits-title" class="section-title">Por que investir em acessibilidade hoje?</h2>
+                <div id="benefits-container" class="benefits-grid">
                     <!-- Renderizado via JS -->
                 </div>
             </div>
         </section>
 
-        <!-- Seção de Prova Social (Carrossel) -->
-        <section class="social-proof">
+        <!-- Carrossel de Depoimentos Dinâmico -->
+        <section id="depoimentos" class="testimonials section-padding reveal bg-light" aria-labelledby="testimonials-title">
             <div class="container">
-                <div class="section-title">
-                    <h2>Escolas Transformadas</h2>
-                    <p>Veja o impacto real da nossa consultoria na vida de alunos e educadores.</p>
-                </div>
-                <div class="carousel-module">
-                    <button id="prev-btn" class="carousel-nav" aria-label="Anterior">❮</button>
-                    <div id="carousel-root" class="carousel-track-container" aria-live="polite">
+                <h2 id="testimonials-title" class="section-title">O impacto real nas instituições</h2>
+                <div class="carousel-wrapper">
+                    <div id="carousel-container" class="carousel">
                         <!-- Renderizado via JS -->
                     </div>
-                    <button id="next-btn" class="carousel-nav" aria-label="Próximo">❯</button>
                 </div>
+            </div>
+        </section>
+
+        <!-- Acordeão FAQ Dinâmico -->
+        <section id="faq" class="faq section-padding reveal" aria-labelledby="faq-title">
+            <div class="container faq-container">
+                <h2 id="faq-title" class="section-title">Perguntas Frequentes</h2>
+                <div id="accordion-container" class="accordion">
+                    <!-- Renderizado via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section id="contato" class="cta section-padding reveal bg-dark" aria-labelledby="cta-title">
+            <div class="container cta-content">
+                <h2 id="cta-title">Pronto para tornar sua escola referência em inclusão?</h2>
+                <p>Nossos especialistas avaliarão a infraestrutura e a pedagogia da sua instituição para criar um plano de ação personalizado.</p>
+                <button class="btn btn-primary btn-large">Quero Ser Referência em Inclusão</button>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="footer">
         <div class="container">
-            <h2>Pronto para tornar sua escola referência em inclusão?</h2>
-            <a href="#contato" class="cta-button outline">Falar com um Especialista</a>
-            <p class="copyright">&copy; 2026 InclusãoEdu. Todos os direitos reservados.</p>
+            <p>&copy; 2026 Escola Acessível. Todos os direitos reservados. Fomentando um futuro educacional sem barreiras.</p>
         </div>
     </footer>
 

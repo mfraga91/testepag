@@ -1,145 +1,169 @@
 /**
- * ESTADO E DADOS GLOBAIS
- * Estrutura baseada em Array de Objetos para facilitar a manutenção técnica.
+ * GERENCIADOR DE ESTADO E COMPONENTES
+ * Lida com Dados Dinâmicos, Acessibilidade e Animações.
  */
-const accData = [
+
+// 1. DADOS DOS COMPONENTES (Evitando repetição no HTML)
+const benefitsData = [
     {
-        id: "pilar-1",
-        title: "Adequação Arquitetônica",
-        desc: "Transformamos o espaço físico com rampas adaptadas, pisos táteis, banheiros acessíveis e sinalização em Braille, garantindo autonomia e segurança a todos."
+        title: "Adequação à LBI",
+        description: "Garantimos que sua escola cumpra 100% as normas da Lei Brasileira de Inclusão, evitando sanções e multas governamentais."
     },
     {
-        id: "pilar-2",
         title: "Tecnologia Assistiva",
-        desc: "Implementação de softwares de leitura de tela, teclados colmeia, mouses adaptados e lousas digitais acessíveis nos laboratórios de informática."
+        description: "Implementamos hardwares e softwares educativos que democratizam a informação para alunos com deficiências sensoriais ou motoras."
     },
     {
-        id: "pilar-3",
-        title: "Capacitação Pedagógica",
-        desc: "Treinamentos práticos para o corpo docente focado no Atendimento Educacional Especializado (AEE), adaptação de materiais e Libras básico."
+        title: "Capacitação Docente",
+        description: "Treinamentos práticos para coordenadores e professores adotarem metodologias inclusivas em sala de aula de forma natural."
+    },
+    {
+        title: "Arquitetura Inclusiva",
+        description: "Mapeamento e reestruturação de espaços físicos: rampas, pisos táteis, banheiros adaptados e sinalização universal."
     }
 ];
 
 const testimonialsData = [
     {
-        quote: "O diagnóstico mostrou barreiras que não enxergávamos. Hoje, nossos alunos com deficiência participam ativamente de todas as dinâmicas escolares.",
-        author: "Diretora Lúcia Mendes",
-        role: "Colégio Progresso Educacional"
+        quote: "Antes, não sabíamos como adaptar nossas provas. Hoje, temos orgulho de ver alunos com TEA acompanhando a turma com excelência.",
+        author: "Marcia V., Diretora Pedagógica"
     },
     {
-        quote: "As tecnologias assistivas não apenas incluíram nossos alunos PCD, mas enriqueceram o processo de aprendizado de toda a turma.",
-        author: "Prof. Marcos Andrade",
-        role: "Coordenador de TI Escolar"
+        quote: "O diagnóstico de infraestrutura revelou barreiras que não enxergávamos. A reforma transformou a dinâmica do pátio escolar.",
+        author: "Roberto S., Mantenedor Escolar"
     },
     {
-        quote: "Reduzimos a evasão escolar e aumentamos o engajamento das famílias. A escola agora reflete a diversidade do mundo real.",
-        author: "Camila Ribeiro",
-        role: "Mantenedora"
+        quote: "Uma consultoria assertiva e direta ao ponto. Nossas matrículas de inclusão cresceram 40% graças à nova reputação da escola.",
+        author: "Helena G., Coordenadora de Inclusão"
     }
 ];
 
-/**
- * LÓGICA DE COMPONENTES
- */
-// 1. Renderizar Acordeão
-const accRoot = document.getElementById('accordion-root');
-if (accRoot) {
-    accData.forEach((item, index) => {
-        const article = document.createElement('div');
-        article.className = 'acc-item';
-        
-        article.innerHTML = `
-            <button class="acc-header" aria-expanded="false" aria-controls="content-${index}">
-                ${item.title}
+const faqData = [
+    {
+        question: "Como funciona o diagnóstico inicial gratuito?",
+        answer: "Agendamos uma reunião online ou presencial para mapear os principais desafios arquitetônicos e pedagógicos da sua escola, entregando um panorama das urgências sem custo."
+    },
+    {
+        question: "Vocês realizam as obras arquitetônicas?",
+        answer: "Nós entregamos o projeto arquitetônico acessível assinado por engenheiros especializados, e podemos acompanhar a execução junto à sua empreiteira de confiança."
+    },
+    {
+        question: "O treinamento docente abrange o espectro autista?",
+        answer: "Sim. Nossos módulos de capacitação cobrem TDAH, TEA, deficiências físicas, visuais e auditivas, com estratégias práticas de didática inclusiva."
+    }
+];
+
+// 2. FUNÇÕES DE RENDERIZAÇÃO DOM
+function renderBenefits() {
+    const container = document.getElementById('benefits-container');
+    if (!container) return;
+    
+    container.innerHTML = benefitsData.map(item => `
+        <article class="benefit-card">
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+        </article>
+    `).join('');
+}
+
+function renderCarousel() {
+    const container = document.getElementById('carousel-container');
+    if (!container) return;
+    
+    container.innerHTML = testimonialsData.map(item => `
+        <article class="carousel-item">
+            <blockquote>"${item.quote}"</blockquote>
+            <p class="carousel-author">${item.author}</p>
+        </article>
+    `).join('');
+}
+
+function renderAccordion() {
+    const container = document.getElementById('accordion-container');
+    if (!container) return;
+    
+    container.innerHTML = faqData.map((item, index) => `
+        <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false" aria-controls="faq-content-${index}">
+                ${item.question}
                 <span class="icon" aria-hidden="true">+</span>
             </button>
-            <div id="content-${index}" class="acc-content" role="region">
-                <p>${item.desc}</p>
+            <div id="faq-content-${index}" class="accordion-content">
+                <p>${item.answer}</p>
             </div>
-        `;
-        
-        const btn = article.querySelector('.acc-header');
-        btn.addEventListener('click', () => {
-            const isActive = article.classList.contains('active');
+        </div>
+    `).join('');
+
+    // Lógica do Acordeão
+    const headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const isOpen = header.getAttribute('aria-expanded') === 'true';
             
-            // Fecha todos (comportamento exclusivo)
-            document.querySelectorAll('.acc-item').forEach(el => {
-                el.classList.remove('active');
-                el.querySelector('.acc-header').setAttribute('aria-expanded', 'false');
-                el.querySelector('.icon').textContent = '+';
+            // Fecha todos
+            document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                h.setAttribute('aria-expanded', 'false');
+                h.querySelector('.icon').textContent = '+';
             });
-            
-            // Abre o clicado se não estava ativo
-            if (!isActive) {
-                article.classList.add('active');
-                btn.setAttribute('aria-expanded', 'true');
-                btn.querySelector('.icon').textContent = '-';
+
+            // Abre o atual se não estava aberto
+            if (!isOpen) {
+                header.setAttribute('aria-expanded', 'true');
+                header.querySelector('.icon').textContent = '-';
+                content.style.maxHeight = content.scrollHeight + "px";
             }
         });
-        
-        accRoot.appendChild(article);
     });
 }
 
-// 2. Renderizar Carrossel
-const carRoot = document.getElementById('carousel-root');
-let currentSlide = 0;
+// 3. CONTROLES DE ACESSIBILIDADE E UX
+function initAccessibility() {
+    const btnContrast = document.getElementById('btn-contrast');
+    const btnIncrease = document.getElementById('btn-increase-font');
+    const btnDecrease = document.getElementById('btn-decrease-font');
+    
+    let fontSizePx = 16; // Estado base
+    const htmlElement = document.documentElement;
 
-if (carRoot) {
-    testimonialsData.forEach((test, index) => {
-        const slide = document.createElement('div');
-        slide.className = 'carousel-slide';
-        slide.style.transform = `translateX(${100 * (index - currentSlide)}%)`;
-        slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
-        
-        slide.innerHTML = `
-            <blockquote>"${test.quote}"</blockquote>
-            <p><strong>${test.author}</strong><br>${test.role}</p>
-        `;
-        carRoot.appendChild(slide);
-    });
-
-    const updateCarousel = () => {
-        const slides = document.querySelectorAll('.carousel-slide');
-        slides.forEach((slide, index) => {
-            slide.style.transform = `translateX(${100 * (index - currentSlide)}%)`;
-            slide.setAttribute('aria-hidden', index === currentSlide ? 'false' : 'true');
-        });
-    };
-
-    document.getElementById('next-btn')?.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % testimonialsData.length;
-        updateCarousel();
-    });
-
-    document.getElementById('prev-btn')?.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + testimonialsData.length) % testimonialsData.length;
-        updateCarousel();
-    });
-}
-
-/**
- * LÓGICA DE ACESSIBILIDADE
- */
-// Tamanho de Fonte (Limites rigorosos 12px a 24px)
-let currentFontSize = 16;
-const htmlRoot = document.documentElement;
-
-const adjustFont = (step) => {
-    const novaFonte = currentFontSize + step;
-    if (novaFonte >= 12 && novaFonte <= 24) {
-        currentFontSize = novaFonte;
-        htmlRoot.style.fontSize = `${currentFontSize}px`;
-    }
-};
-
-document.getElementById('btn-increase')?.addEventListener('click', () => adjustFont(2));
-document.getElementById('btn-decrease')?.addEventListener('click', () => adjustFont(-2));
-
-// Alto Contraste
-const btnContrast = document.getElementById('btn-contrast');
-if (btnContrast) {
+    // Toggle Contraste
     btnContrast.addEventListener('click', () => {
         document.body.classList.toggle('high-contrast');
     });
+
+    // Controle de Fonte Restrito
+    const updateFontSize = (newSize) => {
+        if (newSize >= 12 && newSize <= 24) {
+            fontSizePx = newSize;
+            htmlElement.style.fontSize = `${fontSizePx}px`;
+        }
+    };
+
+    btnIncrease.addEventListener('click', () => updateFontSize(fontSizePx + 2));
+    btnDecrease.addEventListener('click', () => updateFontSize(fontSizePx - 2));
 }
+
+// 4. ANIMAÇÕES SCROLL REVEAL
+function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    renderBenefits();
+    renderCarousel();
+    renderAccordion();
+    initAccessibility();
+    initScrollReveal();
+});
