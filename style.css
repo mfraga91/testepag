@@ -1,26 +1,25 @@
 /* ==========================================================================
-   Design System & Variáveis CSS
+   Design System & Variáveis
    ========================================================================== */
 :root {
-    /* Paleta de Cores */
-    --primary-color: #0056b3;
-    --secondary-color: #ff9800;
-    --bg-color: #f4f7f6;
-    --surface-color: #ffffff;
-    --text-color: #333333;
-    --text-light: #666666;
+    --primary: #0047AB;
+    --primary-dark: #003380;
+    --accent: #FFB300;
+    --bg-main: #FFFFFF;
+    --bg-light: #F4F7FB;
+    --text-dark: #1A1A1A;
+    --text-muted: #4A4A4A;
     
-    /* Layout & Formas */
-    --radius: 16px; /* Borda Modern Clean & Bold */
+    --radius: 16px;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    
-    /* Espaçamentos e Tipografia Base */
-    --gap: clamp(1rem, 2vw, 2rem);
+    --gap: clamp(1.5rem, 3vw, 3rem);
     --font-base: 16px;
-    --font-family: 'Poppins', sans-serif;
+    --font-family: 'Montserrat', sans-serif;
 }
 
-/* Reset & Configurações Básicas */
+/* ==========================================================================
+   Reset e Base
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -34,21 +33,22 @@ html {
 
 body {
     font-family: var(--font-family);
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    color: var(--text-dark);
+    background-color: var(--bg-main);
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--gap);
+    width: min(100% - 2rem, 1200px);
+    margin-inline: auto;
+}
+
+.bg-light {
+    background-color: var(--bg-light);
 }
 
 /* ==========================================================================
-   Camada de Acessibilidade: Alto Contraste (Blindado)
+   Camada de Acessibilidade: Alto Contraste (Blindagem)
    ========================================================================== */
 body.high-contrast, body.high-contrast *:not(i):not(.icon) {
     background-color: #000 !important;
@@ -65,19 +65,18 @@ body.high-contrast a, body.high-contrast button {
 }
 
 /* ==========================================================================
-   Componentes de Interface (Layout Mobile-First)
+   Cabeçalho
    ========================================================================== */
-/* Header & Navbar */
 .site-header {
-    background-color: var(--surface-color);
+    background: var(--bg-main);
     box-shadow: var(--shadow);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     padding: 1rem 0;
 }
 
-.nav-bar {
+.header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,192 +84,227 @@ body.high-contrast a, body.high-contrast button {
     gap: 1rem;
 }
 
-.logo {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: var(--primary-color);
+.brand {
+    font-size: 1.5rem;
+    color: var(--primary);
 }
 
-.a11y-tools button {
-    background-color: var(--bg-color);
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.a11y-toolbar button {
+    background: var(--bg-light);
+    border: none;
     padding: 0.5rem 1rem;
-    font-family: inherit;
+    border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    margin-left: 0.5rem;
+    transition: background 0.3s;
 }
 
-.a11y-tools button:hover {
-    background-color: var(--primary-color);
-    color: #fff;
+.a11y-toolbar button:hover {
+    background: #E2E8F0;
 }
 
-/* Hero Section */
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
 .hero {
-    padding: clamp(3rem, 10vw, 8rem) 0;
+    padding: clamp(4rem, 8vw, 8rem) 0;
     text-align: center;
-    background: linear-gradient(135deg, var(--surface-color) 0%, var(--bg-color) 100%);
 }
 
-.hero h1 {
-    font-size: clamp(2rem, 5vw, 4rem);
-    line-height: 1.2;
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(0, 71, 171, 0.1);
+    color: var(--primary);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.875rem;
     margin-bottom: 1.5rem;
 }
 
-.highlight {
-    color: var(--primary-color);
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+.text-highlight {
+    color: var(--primary);
 }
 
 .hero p {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--text-light);
-    max-width: 800px;
-    margin: 0 auto 2.5rem;
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
 }
 
 .cta-button {
     display: inline-block;
-    background-color: var(--secondary-color);
-    color: #fff;
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    font-weight: 700;
+    background: var(--accent);
+    color: #000;
     text-decoration: none;
+    padding: 1rem 2.5rem;
     border-radius: var(--radius);
+    font-weight: 800;
+    font-size: 1.125rem;
     box-shadow: var(--shadow);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .cta-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(255, 152, 0, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255, 179, 0, 0.4);
 }
 
-/* Seções Gerais */
-.section-header {
+/* ==========================================================================
+   Seções Gerais e Acordeão
+   ========================================================================== */
+.pillars, .social-proof {
+    padding: clamp(4rem, 6vw, 6rem) 0;
+}
+
+.section-title {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: clamp(2rem, 4vw, 4rem);
 }
 
-.section-header h2 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: var(--primary-color);
+.section-title h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--primary);
     margin-bottom: 0.5rem;
 }
 
-/* Acordeão (Grid Configurável) */
-.pillars {
-    padding: clamp(3rem, 5vw, 5rem) 0;
-}
-
-.accordion-grid {
+.accordion-wrapper {
     display: grid;
-    /* EDITAR AQUI: Altere para "grid-template-columns: 1fr;" para forçar uma coluna em telas grandes */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--gap);
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.accordion-item {
-    background: var(--surface-color);
+.acc-item {
+    background: var(--bg-main);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: 1.5rem;
+    overflow: hidden;
+}
+
+.acc-header {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 1.5rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: var(--text-dark);
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.accordion-item:hover {
-    background: var(--bg-color);
-}
-
-.accordion-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 700;
-    font-size: 1.1rem;
 }
 
-.accordion-content {
+.acc-content {
+    padding: 0 2rem;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, margin-top 0.4s ease;
-    color: var(--text-light);
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    color: var(--text-muted);
 }
 
-.accordion-item.active .accordion-content {
-    max-height: 200px;
-    margin-top: 1rem;
+.acc-item.active .acc-content {
+    max-height: 300px;
+    padding: 0 2rem 1.5rem 2rem;
 }
 
-/* Carrossel de Depoimentos */
-.social-proof {
-    padding: clamp(3rem, 5vw, 5rem) 0;
-    background-color: var(--surface-color);
-}
-
-.carousel-wrapper {
+/* ==========================================================================
+   Carrossel de Depoimentos
+   ========================================================================== */
+.carousel-module {
     display: flex;
     align-items: center;
     gap: 1rem;
     position: relative;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.carousel {
-    display: flex;
+.carousel-track-container {
     overflow: hidden;
     width: 100%;
     border-radius: var(--radius);
+    display: flex;
 }
 
 .carousel-slide {
     min-width: 100%;
-    background: var(--bg-color);
-    padding: clamp(2rem, 4vw, 3rem);
-    text-align: center;
-    transition: transform 0.5s ease-in-out;
-    box-shadow: var(--shadow);
+    background: var(--bg-light);
+    padding: clamp(2rem, 5vw, 4rem);
     border-radius: var(--radius);
+    text-align: center;
+    transition: transform 0.5s ease;
 }
 
 .carousel-slide blockquote {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    font-style: italic;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 600;
     margin-bottom: 1.5rem;
+    color: var(--primary-dark);
 }
 
-.carousel-control {
-    background: var(--primary-color);
+.carousel-nav {
+    background: var(--primary);
     color: #fff;
     border: none;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
     font-size: 1.2rem;
     cursor: pointer;
     box-shadow: var(--shadow);
-    z-index: 10;
     flex-shrink: 0;
+    transition: transform 0.2s;
 }
 
-/* Footer */
+.carousel-nav:hover {
+    transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 .site-footer {
-    background-color: var(--primary-color);
+    background: var(--primary-dark);
     color: #fff;
     text-align: center;
-    padding: 2rem 0;
+    padding: 4rem 0 2rem;
 }
 
-/* Animações Scroll Reveal */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+.site-footer h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 2rem;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+.cta-button.outline {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
+.cta-button.outline:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+.copyright {
+    margin-top: 4rem;
+    font-size: 0.875rem;
+    opacity: 0.7;
 }

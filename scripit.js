@@ -1,103 +1,102 @@
 /**
- * 1. CAMADA DE DADOS (Arquitetura Inteligente)
- * Renderizamos o HTML diretamente via JavaScript usando array de objetos,
- * eliminando repetição e facilitando a manutenção futura.
+ * ESTADO E DADOS GLOBAIS
+ * Estrutura baseada em Array de Objetos para facilitar a manutenção técnica.
  */
-
-const accordionData = [
+const accData = [
     {
-        id: "acc-1",
+        id: "pilar-1",
         title: "Adequação Arquitetônica",
-        content: "Rampas com inclinação correta, pisos táteis e adaptação de banheiros, garantindo autonomia física e segurança em todo o espaço escolar."
+        desc: "Transformamos o espaço físico com rampas adaptadas, pisos táteis, banheiros acessíveis e sinalização em Braille, garantindo autonomia e segurança a todos."
     },
     {
-        id: "acc-2",
+        id: "pilar-2",
         title: "Tecnologia Assistiva",
-        content: "Integração de softwares leitores de tela, teclados adaptados e mouses oculares nos laboratórios, conectando alunos com deficiência ao mundo digital."
+        desc: "Implementação de softwares de leitura de tela, teclados colmeia, mouses adaptados e lousas digitais acessíveis nos laboratórios de informática."
     },
     {
-        id: "acc-3",
-        title: "Capacitação Docente",
-        content: "Treinamentos focados em Práticas Pedagógicas Inclusivas, Libras e atendimento educacional especializado, preparando o professor para a diversidade."
+        id: "pilar-3",
+        title: "Capacitação Pedagógica",
+        desc: "Treinamentos práticos para o corpo docente focado no Atendimento Educacional Especializado (AEE), adaptação de materiais e Libras básico."
     }
 ];
 
-const testimonialData = [
+const testimonialsData = [
     {
-        text: "Após a implementação das diretrizes de acessibilidade, reduzimos a evasão escolar e vimos alunos com deficiência ganharem autonomia total no recreio.",
-        author: "Diretora Marina S.",
-        role: "Colégio Estadual Inclusão"
+        quote: "O diagnóstico mostrou barreiras que não enxergávamos. Hoje, nossos alunos com deficiência participam ativamente de todas as dinâmicas escolares.",
+        author: "Diretora Lúcia Mendes",
+        role: "Colégio Progresso Educacional"
     },
     {
-        text: "O treinamento docente mudou nossa visão. Hoje não adaptamos a prova para o aluno, nós desenhamos a aula pensando em todos desde o início.",
-        author: "Prof. Roberto A.",
-        role: "Ensino Fundamental II"
+        quote: "As tecnologias assistivas não apenas incluíram nossos alunos PCD, mas enriqueceram o processo de aprendizado de toda a turma.",
+        author: "Prof. Marcos Andrade",
+        role: "Coordenador de TI Escolar"
     },
     {
-        text: "A arquitetura acessível beneficiou não apenas cadeirantes, mas todos os alunos e funcionários. O ambiente ficou mais humano e acolhedor.",
-        author: "Ana Beatriz",
-        role: "Coordenadora Pedagógica"
+        quote: "Reduzimos a evasão escolar e aumentamos o engajamento das famílias. A escola agora reflete a diversidade do mundo real.",
+        author: "Camila Ribeiro",
+        role: "Mantenedora"
     }
 ];
 
 /**
- * 2. RENDERIZAÇÃO DOS COMPONENTES
+ * LÓGICA DE COMPONENTES
  */
-
-// Renderizar Acordeão
-const accordionContainer = document.getElementById('accordion-container');
-if (accordionContainer) {
-    accordionData.forEach(item => {
-        const div = document.createElement('article');
-        div.className = 'accordion-item';
-        div.setAttribute('aria-expanded', 'false');
-        div.innerHTML = `
-            <div class="accordion-header" role="button" aria-controls="${item.id}">
-                <h3>${item.title}</h3>
-                <span class="icon">+</span>
-            </div>
-            <div class="accordion-content" id="${item.id}">
-                <p>${item.content}</p>
+// 1. Renderizar Acordeão
+const accRoot = document.getElementById('accordion-root');
+if (accRoot) {
+    accData.forEach((item, index) => {
+        const article = document.createElement('div');
+        article.className = 'acc-item';
+        
+        article.innerHTML = `
+            <button class="acc-header" aria-expanded="false" aria-controls="content-${index}">
+                ${item.title}
+                <span class="icon" aria-hidden="true">+</span>
+            </button>
+            <div id="content-${index}" class="acc-content" role="region">
+                <p>${item.desc}</p>
             </div>
         `;
         
-        div.addEventListener('click', () => {
-            const isActive = div.classList.contains('active');
+        const btn = article.querySelector('.acc-header');
+        btn.addEventListener('click', () => {
+            const isActive = article.classList.contains('active');
             
-            // Fecha todos (Opcional: remover para deixar múltiplos abertos)
-            document.querySelectorAll('.accordion-item').forEach(el => {
+            // Fecha todos (comportamento exclusivo)
+            document.querySelectorAll('.acc-item').forEach(el => {
                 el.classList.remove('active');
-                el.setAttribute('aria-expanded', 'false');
+                el.querySelector('.acc-header').setAttribute('aria-expanded', 'false');
                 el.querySelector('.icon').textContent = '+';
             });
             
-            // Alterna o estado do atual
+            // Abre o clicado se não estava ativo
             if (!isActive) {
-                div.classList.add('active');
-                div.setAttribute('aria-expanded', 'true');
-                div.querySelector('.icon').textContent = '-';
+                article.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+                btn.querySelector('.icon').textContent = '-';
             }
         });
         
-        accordionContainer.appendChild(div);
+        accRoot.appendChild(article);
     });
 }
 
-// Renderizar Carrossel
-const carouselContainer = document.getElementById('carousel-container');
+// 2. Renderizar Carrossel
+const carRoot = document.getElementById('carousel-root');
 let currentSlide = 0;
 
-if (carouselContainer) {
-    testimonialData.forEach((item, index) => {
+if (carRoot) {
+    testimonialsData.forEach((test, index) => {
         const slide = document.createElement('div');
         slide.className = 'carousel-slide';
-        slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
         slide.style.transform = `translateX(${100 * (index - currentSlide)}%)`;
+        slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+        
         slide.innerHTML = `
-            <blockquote>"${item.text}"</blockquote>
-            <p><strong>${item.author}</strong> - ${item.role}</p>
+            <blockquote>"${test.quote}"</blockquote>
+            <p><strong>${test.author}</strong><br>${test.role}</p>
         `;
-        carouselContainer.appendChild(slide);
+        carRoot.appendChild(slide);
     });
 
     const updateCarousel = () => {
@@ -108,59 +107,39 @@ if (carouselContainer) {
         });
     };
 
-    document.getElementById('next-slide')?.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % testimonialData.length;
+    document.getElementById('next-btn')?.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % testimonialsData.length;
         updateCarousel();
     });
 
-    document.getElementById('prev-slide')?.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + testimonialData.length) % testimonialData.length;
+    document.getElementById('prev-btn')?.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + testimonialsData.length) % testimonialsData.length;
         updateCarousel();
     });
 }
 
 /**
- * 3. FERRAMENTAS DE ACESSIBILIDADE E UX (Conforme regras estritas)
+ * LÓGICA DE ACESSIBILIDADE
  */
-
-// Acessibilidade: Tamanho da Fonte (Limite rigoroso: 12px a 24px)
+// Tamanho de Fonte (Limites rigorosos 12px a 24px)
 let currentFontSize = 16;
-const htmlElement = document.documentElement;
+const htmlRoot = document.documentElement;
 
-const changeFontSize = (amount) => {
-    let novaFonte = currentFontSize + amount;
+const adjustFont = (step) => {
+    const novaFonte = currentFontSize + step;
     if (novaFonte >= 12 && novaFonte <= 24) {
         currentFontSize = novaFonte;
-        htmlElement.style.fontSize = `${currentFontSize}px`;
+        htmlRoot.style.fontSize = `${currentFontSize}px`;
     }
 };
 
-document.getElementById('btn-increase-font')?.addEventListener('click', () => changeFontSize(2));
-document.getElementById('btn-decrease-font')?.addEventListener('click', () => changeFontSize(-2));
+document.getElementById('btn-increase')?.addEventListener('click', () => adjustFont(2));
+document.getElementById('btn-decrease')?.addEventListener('click', () => adjustFont(-2));
 
-// Acessibilidade: Alto Contraste (Alternador de estado)
+// Alto Contraste
 const btnContrast = document.getElementById('btn-contrast');
 if (btnContrast) {
     btnContrast.addEventListener('click', () => {
         document.body.classList.toggle('high-contrast');
-        const isActive = document.body.classList.contains('high-contrast');
-        btnContrast.setAttribute('aria-pressed', isActive);
     });
 }
-
-// Animação de entrada suave (Scroll Reveal)
-const revealElements = document.querySelectorAll('.reveal');
-const revealOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-};
-
-const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target);
-    });
-}, revealOptions);
-
-revealElements.forEach(el => revealOnScroll.observe(el));
