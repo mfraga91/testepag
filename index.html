@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação Inclusiva | Acessibilidade na Escola</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav aria-label="Navegação Principal" class="container nav-bar">
+            <div class="logo"><strong>Inclusão</strong>Edu</div>
+            
+            <div class="a11y-tools" aria-label="Ferramentas de acessibilidade">
+                <button id="btn-decrease-font" aria-label="Diminuir tamanho da fonte" title="Diminuir fonte">A-</button>
+                <button id="btn-increase-font" aria-label="Aumentar tamanho da fonte" title="Aumentar fonte">A+</button>
+                <button id="btn-contrast" aria-label="Ativar modo de alto contraste" title="Alto Contraste">Contraste</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero reveal">
+            <div class="container hero-content">
+                <h1>A Revolução da <span class="highlight">Acessibilidade Inclusiva</span></h1>
+                <p>Transforme sua instituição de ensino em um ambiente 100% preparado, onde cada aluno tem a oportunidade de brilhar. Metodologia validada por mais de 500 escolas.</p>
+                <a href="#consultoria" class="cta-button" role="button">Agendar Consultoria Gratuita</a>
+            </div>
+        </section>
+
+        <section class="pillars reveal" id="solucoes">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Nossos Pilares de Atuação</h2>
+                    <p>O que compõe uma escola verdadeiramente inclusiva e acessível.</p>
+                </header>
+                <div id="accordion-container" class="accordion-grid" role="tablist">
+                    </div>
+            </div>
+        </section>
+
+        <section class="social-proof reveal" id="depoimentos">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Instituições Transformadas</h2>
+                    <p>Veja os resultados de escolas que já implementaram nossas diretrizes.</p>
+                </header>
+                <div class="carousel-wrapper">
+                    <button id="prev-slide" class="carousel-control" aria-label="Depoimento anterior">❮</button>
+                    <div id="carousel-container" class="carousel" aria-live="polite">
+                        </div>
+                    <button id="next-slide" class="carousel-control" aria-label="Próximo depoimento">❯</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 InclusãoEdu - Especialistas em Acessibilidade Escolar.</p>
+            <p>Construindo um futuro sem barreiras na educação.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
