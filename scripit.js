@@ -1,129 +1,248 @@
-// --- DADOS DOS COMPONENTES (ARRAY DE OBJETOS) ---
+/* =========================================================================
+   PROJETO: LANDING PAGE ACCESSIBLENESS IN SCHOOLS
+   ARQUIVO: script.js
+   ========================================================================= */
 
-const faqData = [
-  {
-    question: "Como funciona o diagnóstico de acessibilidade na escola?",
-    answer: "Nossa equipe realiza uma auditoria presencial e técnica avaliando a infraestrutura física, os recursos pedagógicos atuais e o nível de preparação da equipe docente, emitindo um laudo com o plano de adequação."
-  },
-  {
-    question: "A escola é obrigada por lei a se adequar?",
-    answer: "Sim. A Lei Brasileira de Inclusão (LBI - Lei 13.146/2015) e a LDB exigem que instituições públicas e privadas garantam acessibilidade, PDI e atendimento educacional especializado sem cobrança de taxas extras na mensalidade."
-  },
-  {
-    question: "Quanto tempo leva a implementação completa das soluções?",
-    answer: "O cronograma varia de acordo com o porte da escola, mas as formações pedagógicas e adequações prioritárias costumam ser concluídas entre 30 e 90 dias."
-  },
-  {
-    question: "Como funciona a capacitação dos professores?",
-    answer: "Oferecemos oficinas práticas presenciais e online focadas no desenvolvimento do Plano de Ensino Individualizado (PEI), uso de tecnologias assistivas e estratégias de manejo em sala de aula."
-  }
-];
+document.addEventListener('DOMContentLoaded', () => {
 
-const testimonialData = [
-  {
-    quote: "A consultoria transformou nossa equipe. Hoje temos segurança jurídica e, acima de tudo, um ambiente onde todos os estudantes aprendem juntos de verdade.",
-    author: "Dra. Maria Helena Santos",
-    role: "Diretora Pedagógica - Colégio Horizonte"
-  },
-  {
-    quote: "Conseguimos implementar as salas de recursos multifuncionais e capacitar 100% dos nossos professores em tempo recorde. O retorno das famílias foi fantástico.",
-    author: "Prof. Carlos Eduardo Rocha",
-    role: "Mantenedor - Instituto Educacional Inovar"
-  },
-  {
-    quote: "O suporte na adequação do PEI eliminou os gargalos que tínhamos com a inclusão de alunos neurodivergentes. Recomendo a todos os gestores.",
-    author: "Ana Paula Silveira",
-    role: "Coordenadora Inclusiva - Escola Arco-Íris"
-  }
-];
+    /* ---------------------------------------------------------------------
+       1. ARRAYS DE DADOS (GESTÃO DINÂMICA DE CONTEÚDO)
+       --------------------------------------------------------------------- */
 
-// --- ESTADO E LÓGICA DE FONTE E CONTRASTE ---
+    // Dados das Soluções Educacionais (Renderização em Grid)
+    const solucoesData = [
+        {
+            icon: 'fa-universal-access',
+            title: 'Adequação Arquitetônica',
+            description: 'Mapeamento e execução de rampas, sinalização tátil, sanitários acessíveis e rotas livres de barreiras conforme NBR 9050.'
+        },
+        {
+            icon: 'fa-book-open-reader',
+            title: 'Tecnologia Assistiva',
+            description: 'Implementação de softwares de leitura de tela, teclados adaptados e leitores de áudio para alunos com deficiência visual ou motora.'
+        },
+        {
+            icon: 'fa-chalkboard-user',
+            title: 'Capacitação Docente',
+            description: 'Treinamentos práticos para professores sobre Planejamento Educacional Individualizado (PEI) e metodologias inclusivas.'
+        },
+        {
+            icon: 'fa-hands-asl-interpreting',
+            title: 'Inclusão Comunicacional',
+            description: 'Tradução de materiais pedagógicos para Libras, Braille e formatos de Leitura Fácil para deficiência intelectual.'
+        },
+        {
+            icon: 'fa-gavel',
+            title: 'Auditoria Normativa LBI',
+            description: 'Diagnóstico detalhado do nível de conformidade legal da instituição para prevenção de multas e ações civis.'
+        },
+        {
+            icon: 'fa-users-line',
+            title: 'Sensibilização da Comunidade',
+            description: 'Workshops e dinâmicas interativas para estudantes e pais, fortalecendo uma cultura escolar verdadeiramente acolhedora.'
+        }
+    ];
 
-let currentFontSize = 16;
-const MIN_FONT_SIZE = 12;
-const MAX_FONT_SIZE = 24;
+    // Dados do Carrossel de Depoimentos
+    const depoimentosData = [
+        {
+            quote: "A EduInclusiva transformou nosso colégio. Além da reforma física impecável, a capacitação que deram aos nossos professores mudou totalmente a dinâmica das salas de aula.",
+            author: "Dra. Renata Vasconcelos",
+            role: "Diretora Pedagógica - Colégio Horizonte"
+        },
+        {
+            quote: "Estávamos inseguros quanto às exigências da LBI. A consultoria nos entregou um plano claro e executou as obras com zero impacto na nossa rotina escolar.",
+            author: "Prof. Carlos Eduardo Mendes",
+            role: "Mantenedor - Instituto Educacional Alfa"
+        },
+        {
+            quote: "A resposta das famílias foi imediata. Mostrar que nossa escola está preparada para receber todos os alunos aumentou nossas matrículas em 25%.",
+            author: "Mariana Siqueira",
+            role: "Gestora de Admissões - Escola Caminho do Saber"
+        }
+    ];
 
-function updateFontSize(change) {
-  const newSize = currentFontSize + change;
-  if (newSize >= MIN_FONT_SIZE && newSize <= MAX_FONT_SIZE) {
-    currentFontSize = newSize;
-    document.documentElement.style.fontSize = `${(currentFontSize / 16) * 100}%`;
-  }
-}
+    // Dados do Acordeão (FAQ)
+    const faqData = [
+        {
+            question: "O que é exigido pela Lei Brasileira de Inclusão (LBI) nas escolas?",
+            answer: "A LBI exige que escolas públicas e privadas garantam acesso, permanência e aprendizado a estudantes com deficiência, vedando a cobrança de taxas extras em mensalidades e exigindo adequações físicas, materiais adaptados e formação docente."
+        },
+        {
+            question: "Quanto tempo leva para realizar o diagnóstico de acessibilidade?",
+            answer: "Nossa equipe realiza a visita técnica e a análise pedagógica em até 5 dias úteis, entregando um relatório executivo com prioridades e plano de ação em no máximo 15 dias."
+        },
+        {
+            question: "Como funciona a capacitação dos professores?",
+            answer: "Oferecemos módulos presenciais e online focados na elaboração do PEI (Plano de Ensino Individualizado), adaptação de avaliações e uso de tecnologias assistivas no dia a dia da sala."
+        },
+        {
+            question: "As adaptações físicas exigem grandes obras?",
+            answer: "Nem sempre. Muitas vezes soluções inteligentes de sinalização, redistribuição de mobiliário e pequenas rampas pré-moldadas resolvem a maior parte dos gargalos com baixo custo e intervenção mínima."
+        }
+    ];
 
-// --- RENDERIZAÇÃO DOS COMPONENTES ---
+    /* ---------------------------------------------------------------------
+       2. RENDERIZAÇÃO DINÂMICA DE COMPONENTES
+       --------------------------------------------------------------------- */
 
-function renderAccordion() {
-  const container = document.getElementById("accordion-container");
-  if (!container) return;
+    // Renderizar Soluções em Grid
+    const solutionsGrid = document.getElementById('solutions-grid');
+    if (solutionsGrid) {
+        solutionsGrid.innerHTML = solucoesData.map(item => `
+            <article class="card scroll-reveal">
+                <i class="fa-solid ${item.icon} card-icon" aria-hidden="true"></i>
+                <h3>${item.title}</h3>
+                <p>${item.description}</p>
+            </article>
+        `).join('');
+    }
 
-  container.innerHTML = faqData.map((item, index) => `
-    <div class="accordion-item ${index === 0 ? 'active' : ''}">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        <span>${item.question}</span>
-        <span class="icon">▼</span>
-      </button>
-      <div class="accordion-body">
-        <p>${item.answer}</p>
-      </div>
-    </div>
-  `).join('');
-}
+    // Renderizar Carrossel de Depoimentos
+    const carouselContainer = document.getElementById('carousel-container');
+    const carouselDots = document.getElementById('carousel-dots');
+    
+    if (carouselContainer && carouselDots) {
+        carouselContainer.innerHTML = depoimentosData.map((item, index) => `
+            <div class="testimonial-card ${index === 0 ? 'active' : ''}" data-index="${index}">
+                <p class="testimonial-quote">"${item.quote}"</p>
+                <div class="testimonial-author">${item.author}</div>
+                <div class="testimonial-role">${item.role}</div>
+            </div>
+        `).join('');
 
-function toggleAccordion(button) {
-  const item = button.parentElement;
-  const isActive = item.classList.contains("active");
-  
-  document.querySelectorAll(".accordion-item").forEach(el => el.classList.remove("active"));
-  
-  if (!isActive) {
-    item.classList.add("active");
-  }
-}
+        carouselDots.innerHTML = depoimentosData.map((_, index) => `
+            <button class="dot ${index === 0 ? 'active' : ''}" data-index="${index}" aria-label="Ir para depoimento ${index + 1}"></button>
+        `).join('');
+    }
 
-let currentTestimonial = 0;
+    // Renderizar Acordeão (FAQ)
+    const accordionContainer = document.getElementById('accordion-container');
+    if (accordionContainer) {
+        accordionContainer.innerHTML = faqData.map((item, index) => `
+            <div class="accordion-item scroll-reveal">
+                <button class="accordion-header" aria-expanded="false" aria-controls="faq-ans-${index}">
+                    <span>${item.question}</span>
+                    <i class="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
+                </button>
+                <div id="faq-ans-${index}" class="accordion-content">
+                    <p>${item.answer}</p>
+                </div>
+            </div>
+        `).join('');
+    }
 
-function renderCarousel() {
-  const track = document.getElementById("carousel-track");
-  if (!track) return;
+    /* ---------------------------------------------------------------------
+       3. CONTROLE DE ACESSIBILIDADE (FONTE E ALTO CONTRASTE)
+       --------------------------------------------------------------------- */
 
-  const item = testimonialData[currentTestimonial];
-  track.innerHTML = `
-    <div class="carousel-card">
-      <p class="carousel-text">"${item.quote}"</p>
-      <div>
-        <p class="carousel-author">${item.author}</p>
-        <p class="carousel-role">${item.role}</p>
-      </div>
-    </div>
-  `;
-}
+    let currentFontSize = 16; // Tamanho base em px
 
-function nextTestimonial() {
-  currentTestimonial = (currentTestimonial + 1) % testimonialData.length;
-  renderCarousel();
-}
+    const btnIncreaseFont = document.getElementById('btn-increase-font');
+    const btnDecreaseFont = document.getElementById('btn-decrease-font');
+    const btnToggleContrast = document.getElementById('btn-toggle-contrast');
 
-function prevTestimonial() {
-  currentTestimonial = (currentTestimonial - 1 + testimonialData.length) % testimonialData.length;
-  renderCarousel();
-}
+    if (btnIncreaseFont) {
+        btnIncreaseFont.addEventListener('click', () => {
+            if (currentFontSize < 24) { // Limite máximo
+                currentFontSize += 2;
+                document.documentElement.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+    }
 
-// --- INICIALIZAÇÃO DE EVENTOS ---
+    if (btnDecreaseFont) {
+        btnDecreaseFont.addEventListener('click', () => {
+            if (currentFontSize >= 12) { // Limite mínimo
+                currentFontSize -= 2;
+                document.documentElement.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+    }
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Eventos de Acessibilidade
-  document.getElementById("btn-increase-font")?.addEventListener("click", () => updateFontSize(2));
-  document.getElementById("btn-decrease-font")?.addEventListener("click", () => updateFontSize(-2));
-  document.getElementById("btn-toggle-contrast")?.addEventListener("click", () => {
-    document.body.classList.toggle("high-contrast");
-  });
+    if (btnToggleContrast) {
+        btnToggleContrast.addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+        });
+    }
 
-  // Eventos de Carrossel
-  document.getElementById("carousel-next")?.addEventListener("click", nextTestimonial);
-  document.getElementById("carousel-prev")?.addEventListener("click", prevTestimonial);
+    /* ---------------------------------------------------------------------
+       4. LÓGICA DO CARROSSEL
+       --------------------------------------------------------------------- */
 
-  // Renderizar Telas
-  renderAccordion();
-  renderCarousel();
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.testimonial-card');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    function showSlide(index) {
+        if (!slides.length) return;
+        
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        currentSlide = (index + slides.length) % slides.length;
+
+        slides[currentSlide].classList.add('active');
+        if (dots[currentSlide]) {
+            dots[currentSlide].classList.add('active');
+        }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-index'));
+            showSlide(index);
+        });
+    });
+
+    /* ---------------------------------------------------------------------
+       5. LÓGICA DO ACORDEÃO
+       --------------------------------------------------------------------- */
+
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const accordionItem = header.parentElement;
+            const isActive = accordionItem.classList.contains('active');
+
+            // Fechar todos os outros itens
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                item.classList.remove('active');
+                const btn = item.querySelector('.accordion-header');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
+
+            // Alternar estado do item clicado
+            if (!isActive) {
+                accordionItem.classList.add('active');
+                header.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    /* ---------------------------------------------------------------------
+       6. ANIMAÇÃO SUAVE DE ENTRADA (SCROLL REVEAL)
+       --------------------------------------------------------------------- */
+
+    const revealElements = document.querySelectorAll('.scroll-reveal, .section-header, .benefit-card');
+
+    const revealOnScroll = () => {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        revealElements.forEach(el => {
+            const boxTop = el.getBoundingClientRect().top;
+            if (boxTop < triggerBottom) {
+                el.classList.add('revealed');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Executar uma vez ao carregar
 });
