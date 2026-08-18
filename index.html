@@ -3,93 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educação Inclusiva | Acessibilidade na Escola</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Inclusão Ativa | Soluções em Acessibilidade Escolar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Barra de Acessibilidade -->
-    <div class="accessibility-bar" role="toolbar" aria-label="Ferramentas de acessibilidade">
-        <div class="container a11y-controls">
-            <span class="a11y-label">Acessibilidade:</span>
-            <button id="btn-contrast" aria-label="Alternar modo de alto contraste">Alto Contraste</button>
-            <button id="btn-decrease-font" aria-label="Diminuir tamanho da fonte">A-</button>
-            <button id="btn-increase-font" aria-label="Aumentar tamanho da fonte">A+</button>
-        </div>
-    </div>
 
     <header class="header">
         <div class="container header-content">
-            <div class="logo" aria-label="Logotipo Escola Acessível">Escola<strong>Acessível</strong></div>
-            <nav aria-label="Navegação principal">
-                <a href="#solucoes" class="nav-link">Nossas Soluções</a>
-                <a href="#depoimentos" class="nav-link">Impacto</a>
-                <a href="#faq" class="nav-link">Dúvidas</a>
-                <a href="#contato" class="btn btn-primary">Falar com Especialista</a>
+            <div class="logo">
+                Inclusão<span>Ativa</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#solucoes">Soluções</a>
+                <a href="#beneficios">Diferenciais</a>
+                <a href="#depoimentos">Casos de Sucesso</a>
+                <a href="#faq">Dúvidas</a>
             </nav>
+            <div class="accessibility-bar" aria-label="Controles de Acessibilidade">
+                <button id="btn-decrease-font" title="Diminuir Fonte" aria-label="Diminuir tamanho da fonte">A-</button>
+                <button id="btn-increase-font" title="Aumentar Fonte" aria-label="Aumentar tamanho da fonte">A+</button>
+                <button id="btn-toggle-contrast" title="Alternar Contraste" aria-label="Alternar modo de alto contraste">◐</button>
+            </div>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero reveal" aria-labelledby="hero-title">
+        <section class="hero">
             <div class="container hero-grid">
                 <div class="hero-text">
-                    <h1 id="hero-title">A Educação Inclusiva Começa Aqui: Transforme Sua Escola</h1>
-                    <p>Capacite educadores, adapte ambientes e garanta o aprendizado pleno para todos os alunos com nosso programa completo de acessibilidade escolar. Adeque-se à legislação e crie um ambiente de empatia.</p>
-                    <div class="hero-actions">
-                        <a href="#contato" class="btn btn-primary btn-large">Agendar Diagnóstico Gratuito</a>
-                        <span class="scarcity-text">Apenas 5 vagas para consultoria neste mês.</span>
+                    <span class="badge">Adequação À LBI & LDB</span>
+                    <h1>Transforme sua escola em um ambiente 100% inclusivo e acolhedor</h1>
+                    <p>Implemente metodologias, tecnologias assistivas e capacitação docente para garantir a permanência e o aprendizado pleno de alunos com deficiência ou neurodivergências.</p>
+                    <div class="hero-cta">
+                        <a href="#contato" class="btn btn-primary">Solicitar Diagnóstico Gratuito</a>
+                        <a href="#solucoes" class="btn btn-secondary">Conhecer Soluções</a>
+                    </div>
+                    <div class="hero-trust">
+                        <span>✓ +150 escolas transformadas</span>
+                        <span>✓ Conforme ABNT NBR 9050</span>
+                    </div>
+                </div>
+                <div class="hero-card-preview">
+                    <div class="stat-card">
+                        <h3>98%</h3>
+                        <p>De retenção e satisfação das famílias atendidas</p>
+                    </div>
+                    <div class="stat-card accent">
+                        <h3>100%</h3>
+                        <p>Segurança jurídica contra notificações de incalculabilidade</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Benefícios Dinâmicos -->
-        <section id="solucoes" class="benefits section-padding reveal" aria-labelledby="benefits-title">
+        <section id="solucoes" class="section">
             <div class="container">
-                <h2 id="benefits-title" class="section-title">Por que investir em acessibilidade hoje?</h2>
-                <div id="benefits-container" class="benefits-grid">
-                    <!-- Renderizado via JS -->
+                <div class="section-header">
+                    <h2>Pilares da Acessibilidade Escolar Integral</h2>
+                    <p>Uma abordagem completa que conecta infraestrutura arquitetônica, pedagogia inclusiva e tecnologia assistiva.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Carrossel de Depoimentos Dinâmico -->
-        <section id="depoimentos" class="testimonials section-padding reveal bg-light" aria-labelledby="testimonials-title">
-            <div class="container">
-                <h2 id="testimonials-title" class="section-title">O impacto real nas instituições</h2>
-                <div class="carousel-wrapper">
-                    <div id="carousel-container" class="carousel">
-                        <!-- Renderizado via JS -->
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🏛️</div>
+                        <h3>Adequação Arquitetônica</h3>
+                        <p>Mapeamento de barreiras físicas e elaboração de projetos conforme a NBR 9050: rampas, sinalização tátil e sanitários adaptados.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎓</div>
+                        <h3>Capacitação Docente</h3>
+                        <p>Treinamento prático para professores sobre Plano de Desenvolvimento Individualizado (PDI) e estratégias para PEI eficazes.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💻</div>
+                        <h3>Tecnologia Assistiva</h3>
+                        <p>Adoção de softwares de comunicação alternativa, leitoras de tela e equipamentos adaptados para salas de recursos multifuncionais.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Acordeão FAQ Dinâmico -->
-        <section id="faq" class="faq section-padding reveal" aria-labelledby="faq-title">
-            <div class="container faq-container">
-                <h2 id="faq-title" class="section-title">Perguntas Frequentes</h2>
-                <div id="accordion-container" class="accordion">
-                    <!-- Renderizado via JS -->
+        <section id="beneficios" class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Por que sua instituição precisa se adequar hoje?</h2>
+                    <p>A acessibilidade é mais do que um cumprimento legal: é o maior diferencial de valorização da sua marca educacional.</p>
+                </div>
+                <div class="cards-grid">
+                    <div class="card border-accent">
+                        <h3>Compliance & Segurança Jurídica</h3>
+                        <p>Evite penalidades legais e autuações do Ministério Público garantindo o cumprimento integral da Lei Brasileira de Inclusão (LBI).</p>
+                    </div>
+                    <div class="card border-accent">
+                        <h3>Retenção e Captação de Alunos</h3>
+                        <p>Famílias buscam instituições preparadas. Destaque-se como referência de acolhimento ético e pedagógico na sua região.</p>
+                    </div>
+                    <div class="card border-accent">
+                        <h3>Cultura Organizacional Empática</h3>
+                        <p>Promova um ambiente escolar saudável, diversificado e preparado para desenvolver competências socioemocionais em todos os alunos.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Final -->
-        <section id="contato" class="cta section-padding reveal bg-dark" aria-labelledby="cta-title">
-            <div class="container cta-content">
-                <h2 id="cta-title">Pronto para tornar sua escola referência em inclusão?</h2>
-                <p>Nossos especialistas avaliarão a infraestrutura e a pedagogia da sua instituição para criar um plano de ação personalizado.</p>
-                <button class="btn btn-primary btn-large">Quero Ser Referência em Inclusão</button>
+        <section id="depoimentos" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>O que dizem os gestores educacionais</h2>
+                    <p>Depoimentos reais de quem tornou sua escola um espaço sem barreiras.</p>
+                </div>
+                <div class="carousel-container">
+                    <div id="carousel-track" class="carousel-track"></div>
+                    <div class="carousel-controls">
+                        <button id="carousel-prev" class="carousel-btn" aria-label="Depoimento anterior">❮</button>
+                        <button id="carousel-next" class="carousel-btn" aria-label="Próximo depoimento">❯</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Perguntas Frequentes</h2>
+                    <p>Tire suas dúvidas sobre o processo de implementação da acessibilidade escolar.</p>
+                </div>
+                <div id="accordion-container" class="accordion-wrapper"></div>
+            </div>
+        </section>
+
+        <section id="contato" class="section section-cta">
+            <div class="container">
+                <div class="cta-box">
+                    <h2>Pronto para tornar sua escola referência em inclusão?</h2>
+                    <p>Agende uma conversa técnica com nossos especialistas em acessibilidade pedagógica e receba um plano de ação personalizado.</p>
+                    <form class="cta-form" onsubmit="event.preventDefault(); alert('Solicitação enviada com sucesso! Entraremos em contato.');">
+                        <input type="text" placeholder="Seu nome completo" required>
+                        <input type="email" placeholder="Seu e-mail corporativo" required>
+                        <input type="tel" placeholder="Telefone / WhatsApp" required>
+                        <button type="submit" class="btn btn-primary">Solicitar Agendamento</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Escola Acessível. Todos os direitos reservados. Fomentando um futuro educacional sem barreiras.</p>
+        <div class="container footer-content">
+            <p>&copy; 2026 Inclusão Ativa Soluções Educacionais. Todos os direitos reservados.</p>
+            <p>Conforme diretrizes de Acessibilidade Web (WCAG 2.1) e Legislação Nacional.</p>
         </div>
     </footer>
 
